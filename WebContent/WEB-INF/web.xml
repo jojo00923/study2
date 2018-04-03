@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		 xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+		 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" 
+		 version="3.1">
+  <display-name>Study</display-name>
+  <welcome-file-list> 
+<!--   url에 파일명이 없으면 여기에서 찾아봄? -->
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+<!--   어플리케이션 구동을 하는데 업로드 경로를 /a폴더에 하기로 했음. 파일처리를 할 때 여기에 저장해놨음. -->
+<!--   이걸 친구에게 줬음. 그럼 그 친구가 a라는 폴더가 없거나 다른곳에 저장하고 싶을때 설정 바꿨으면 하잖아? -->
+<!--   파람네임 uploadpass 파람밸류 /upload처럼 저장 -->
+<!--   컴퓨터가 이걸 읽어서 여기에 저장해야겠구나 하고 저장함. value는 저장장소임 -->
+  
+  <!--   나중에 이걸 어플리케이션을 통해서 읽을 수 있음 -->
+  
+<!--   <error-page>
+  	<error-code>404</error-code>
+  	<location>/error/error404.jsp</location>
+  </error-page>
+  
+  <error-page>
+  	<error-code>500</error-code>
+  	<location>/error/error500.jsp</location>
+  </error-page> -->
+
+  <!-- url 패턴
+  	-확장자 매핑 : *.nhn, *.do
+  	-경로 매핑 : /08/* , /member/* , /* (-> /밑에 모든것 = 모든 파일)
+  	-완전 매핑 : /08/readFile.jsp , /common.download.do 사용자가 이렇게 했을때만 매핑하겠다.
+  	-안됨~~ : /08/*.nhn
+    -->
+  
+  
+  <!-- <servlet>
+  	<servlet-name>loadDriver</servlet-name>
+  	<servlet-class>com.Study.servlet.DriverLoader</servlet-class>
+  	<load-on-startup>1</load-on-startup>
+  </servlet> --><!-- mybatis가 connection해줘서 이제 필요없음. -->
+  
+  <servlet>
+  	<servlet-name>mainController</servlet-name>
+  	<servlet-class>com.Study.servlet.TestController</servlet-class>
+  	<init-param>
+  		<param-name>configFile</param-name>
+  		<param-value>/WEB-INF/classes/resource/study_uri.properties</param-value>
+  	</init-param>
+  	<load-on-startup>2</load-on-startup> 
+  </servlet>
+  <!--웹서버가 기동할때 로드해달라는 뜻. init이 쫙 실행됨 초반부에 작업해놔라...는 뜻  -->
+  
+  <!-- 사용자가 서버로 들어올때 확장자가 do면 이걸타라는것 -->
+  <servlet-mapping>
+  	<servlet-name>mainController</servlet-name>
+  	<url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+  
+  
+</web-app>
+
+
+
+
+

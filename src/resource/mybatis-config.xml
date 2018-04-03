@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- mybatis-config.xml -->
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+<!-- 프로포티스 파일을 불러옴 -->
+	<properties resource="resource/db.properties" />
+
+	<typeAliases>
+		<typeAlias alias="member" type="com.Study.member.vo.Member"/>
+		<typeAlias alias="board" type="com.Study.board.vo.Board"/>
+		<typeAlias alias="boardSearch" type="com.Study.board.vo.BoardSearch"/>
+	</typeAliases>
+	
+	<!-- JDBC 드라이버 로딩 -->
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="${db.driver}" />
+				<property name="url" value="${db.url}" />
+				<property name="username" value="${db.username}" />
+				<property name="password" value="${db.password}" />
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<!-- xml로 sql문장이 들어간 파일(맵핑파일) 연결, 아이디는 메인컨트롤러 인터페이스의 추상메서드명과 동일 -->
+	<mappers>
+		<mapper resource="resource/mapper/common.xml" />
+		<mapper resource="resource/mapper/member.xml" />
+		<mapper resource="resource/mapper/board.xml" />
+	</mappers>
+</configuration>
+
+
+
+
+
