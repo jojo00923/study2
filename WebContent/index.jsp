@@ -12,31 +12,34 @@
 <title>/ index.jsp</title>
 
 <style>
-body, html {width:100%; height:100%;} div:last-child { clear:both; }
-
+	#header {}
+	#left {width:20%;float:left;}
+	#contents {width:20%;float:left;}
+	#footer {clear:both;}
+	body, html {width:100%; height:100%;} 
 </style>
 </head>
 <body style="width: 100%; height: 100%;">
-	<div>
+	<div id="header">
 		<!--메뉴영역 start top.jsp?age=36 -->
 		<!--서블릿이 각각만들어짐. 얘를 만나면 결과를얘한테준다???????  -->
 		<jsp:include page="/include/top.jsp" flush="false" />
 		<!--메뉴영역 end-->
 	</div>
 
-	<div style="width: 30%; float: left">
+	<div  id="left">
 		<!--좌측메뉴 start-->
 		<jsp:include page="/include/left.jsp" flush="false" />
 		<!--좌측메뉴 end-->
 	</div>
 
-	<div style="width: 70%; float: left">
+	<div  id="contents">
 		<!--본문 start-->
 		A-Ra 사이트입니다.
 		<!--본문 end-->
 	</div>
 
-	<div>
+	<div  id="footer">
 		<!--풋터 start-->
 
 		<jsp:include page="/include/footer.jsp" flush="false" />
