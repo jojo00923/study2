@@ -56,27 +56,7 @@ db 하나하나의 변수를 resultType에 담는다. (Member에 담았으니깐
 	<select id="getBoardCount" parameterType="boardSearch" resultType="int" >                                          
 		SELECT count(*) 
 			FROM tb_board
-			<include refid="boardListWhereClause"/>  
-		<!-- <where>	
-		<if test="searchWord != null and searchWord != '' ">동적 sql
-			<choose>
-				<when test="searchType == 'all'">
-					bo_title LIKE '%' || #{searchWord} || '%'
-			OR	bo_writer LIKE '%' || #{searchWord} || '%'
-			OR	bo_content LIKE '%' || #{searchWord} || '%'
-				</when>
-				<when test="searchType == 'bo_title'">
-				bo_title LIKE '%' || #{searchWord} || '%'
-				</when>
-				<when test="searchType == 'bo_writer'">
-				bo_writer LIKE '%' || #{searchWord} || '%'
-				</when>
-				<when test="searchType == 'bo_content'">
-				bo_content LIKE '%' || #{searchWord} || '%'
-				</when>
-			</choose>
-		</if>	 
-		</where>       -->                                                       
+			<include refid="boardListWhereClause"/>                                                        
   </select>
   
   <!-- 상세조회 -->
@@ -98,8 +78,10 @@ db 하나하나의 변수를 resultType에 담는다. (Member에 담았으니깐
   </select>
 
 <!-- update, insert, delete는 무조건 int를 반환하기 때문에 resultType을 쓸 필요 없쪄 -->
-	<insert id="insertBoard" parameterType="board" >                                                 
-		                           
+	<insert id="insertBoard" parameterType="board" > <!-- board가 넘어온객체임.  -->                                                
+	<selectKey keyProperty="bo_no" order="BEFORE" resultType="int"> <!-- 넘어온 객체(board)에 넣어서 결과값을 보노에 넣겠다. -->
+    select seq_board.nextval FROM dual
+  </selectKey>	                           
 	INSERT INTO TB_BOARD ( 
 	      bo_no           
 	    , bo_title         
@@ -112,8 +94,8 @@ db 하나하나의 변수를 resultType에 담는다. (Member에 담았으니깐
 	    , bo_reg_date     
 	    , bo_mod_date    
 			)                  
-	VALUES 	(             
-		seq_board.nextval		  
+	VALUES 	(           
+			 #{bo_no}  <!-- seq_board.nextval이었는데 바꿈. 시퀀스를 별도로 실행시켜 담을곳 지정해서, 시퀀스가 아니라 객체값#{bo_no}을 써줌 -->		  
 			,#{bo_title} 		             
 			,#{bo_writer}		            
 			,#{bo_passwd}		            

@@ -60,7 +60,8 @@ public class BoardDaoMyBatis implements IBoardDao {
 		SqlSession session = MyBatisFactory.getSqlSession().openSession();
 			
 			try {
-				int cnt = session.update( namespace + "insertBoard", board );
+				int cnt = session.insert( namespace + "insertBoard", board ); //update든 insert든 select만 아니면 상관 없음.
+				session.commit();
 				return cnt;
 		
 			} finally {

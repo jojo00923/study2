@@ -20,7 +20,7 @@ public class BoardServiceImpl {
 		Connection conn = null;
 		
 		try {
-			conn = DriverManager.getConnection("jdbc:apache:commons:dbcp:Study");
+			//conn = DriverManager.getConnection("jdbc:apache:commons:dbcp:Study");
 			int cnt = boardDao.getBoardCount(conn, boardSearch); 
 			return cnt;
 		} catch (SQLException e) {
@@ -34,7 +34,7 @@ public class BoardServiceImpl {
 		Connection conn = null;
 		
 		try {
-			conn = DriverManager.getConnection("jdbc:apache:commons:dbcp:Study");
+			//conn = DriverManager.getConnection("jdbc:apache:commons:dbcp:Study");
 			List<Board> list = boardDao.getBoardList(conn, boardSearch); //dao는 커넥션에 맵 줘야되는데 왜 안줘? 오류나서 맵 던져줌.? boardSearch로 바꿈
 			return list;
 		} catch (SQLException e) {
@@ -49,7 +49,7 @@ public class BoardServiceImpl {
 	public Board getBoard(int bo_no) {
 		Connection conn = null;
 		try {
-			conn = DriverManager.getConnection("jdbc:apache:commons:dbcp:Study");
+			/*conn = DriverManager.getConnection("jdbc:apache:commons:dbcp:Study");*/
 			Board board = boardDao.getBoard(conn, bo_no);
 			return board;
 		} catch (SQLException e) {
@@ -63,14 +63,15 @@ public class BoardServiceImpl {
 		Connection conn = null;
 		int cnt=0;
 		try {
-			conn = DriverManager.getConnection("jdbc:apache:commons:dbcp:Study");
+/*			conn = DriverManager.getConnection("jdbc:apache:commons:dbcp:Study");*/
 			cnt = boardDao.insertBoard(conn, board);
+			return cnt;
 		} catch (SQLException e) {
-			throw new RuntimeException("등록 오류", e);
+			throw new RuntimeException("글등록 오류", e);
 		}finally {
 			if(conn != null) try {conn.close();}catch(Exception e){};			
 		}
-		return cnt;
+	
 	}
 	
 
@@ -80,7 +81,7 @@ public class BoardServiceImpl {
 		int cnt = 0;
 		
 		try {
-			conn = DriverManager.getConnection("jdbc:apache:commons:dbcp:Study");
+			/*conn = DriverManager.getConnection("jdbc:apache:commons:dbcp:Study");*/
 			cnt = boardDao.updateBoard(conn, board);
 		} catch (SQLException e) {
 			e.printStackTrace();

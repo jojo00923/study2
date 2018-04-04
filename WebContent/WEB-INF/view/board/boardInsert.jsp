@@ -29,32 +29,39 @@
 </head>
 <body>
 <div class="container">
-<jsp:useBean id="board" class="com.Study.board.vo.Board"></jsp:useBean> <!-- 파라미터 이름과 세터가 같으면 자동입력되게하는것. request.getParameter 대신 사용. -->
-<jsp:setProperty property="*" name="board"/>
-		<%	
-			BoardServiceImpl boardService = new BoardServiceImpl();
-			board.setBo_ip(request.getRemoteAddr());/*작성자 제목 패스워드 이메일 내용 아이피 6개가 남겨서 레지스트 보드로간다.  */
-		
-			int result = boardService.registBoard(board);
-			
-			if(result > 0){
-		%>
-	
-	
-			<script type="text/javascript">
-				alert("회원가입 성공하셨습니다");
-				location.href="boardList.jsp";
-			</script>
-					<%
-				}else{//업데이트 할것이 없음 //실패
-					%>
-					<div class="row">
-						업데이트 항목이 없습니다.<br>
 
-					</div>
-					<%
-				}
-			%>
+	<div class="row text-center"></div>
+		<div class="alert alert-info col-md-4 col-md-offset-4">
+			${message }
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-6 col-xs-4">
+			<a href="boardList.do">목록으로</a>
+			<a href="boardView.do?bo_no=${board.bo_no }">글 보기</a>
+		</div>
+	</div>
+			
 	</div><!--컨테이너 종료-->
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

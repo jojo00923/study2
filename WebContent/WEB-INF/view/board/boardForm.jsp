@@ -32,7 +32,7 @@
 		<div class="page-header">
 			<h2>회원 등록</h2>
 		</div>
-		<form action="boardInsert.jsp" method="post">
+		<form action="boardInsert.do" method="post">
 			<div class="row">
 
 				<table name="editor1" class="table table-striped">
@@ -71,7 +71,7 @@
 
 			</div>
 			<div class="row">
-				<a class="btn btn-default" href="boardList.jsp" role="button">취소</a>
+				<a class="btn btn-default" href="boardList.do" role="button">목록으로</a>
 				<button type="submit" class="btn btn-default pull-right"
 					role="button">저장</button>
 			</div>
